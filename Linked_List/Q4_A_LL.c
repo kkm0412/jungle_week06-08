@@ -87,6 +87,53 @@ int main()
 void moveEvenItemsToBack(LinkedList *ll)
 {
 	/* add your code here */
+	// ll이 들어오면 llodd를 새로 만듬
+	LinkedList lleven;
+
+	lleven.head = NULL;
+	lleven.size = 0;
+	// prev와 cur을 선언
+	ListNode *prev;
+	ListNode *cur;
+	prev = NULL;
+	cur = ll -> head;
+
+	// ll을 순차적으로 돌면서 llodd에 데이터를 추가함.
+	while(cur!=NULL){
+		if (cur->item %2 == 0){
+			//prev NULL
+			//cur head
+			if(cur == ll->head){ //+prev가 NULL일때
+				// printf("처음에서 뽑기");
+				ll->head = cur->next;
+				insertNode(&lleven, lleven.size, cur->item);
+				ll-> size--;
+				cur->item = NULL;	//cur 초기화
+				cur->next = NULL;
+				cur = ll->head;
+			}
+			else{
+				// printf("중간에서 뽑기");
+				prev->next = cur->next;
+				insertNode(&lleven, lleven.size, cur->item);
+				ll->size--;
+				cur->item = NULL;
+				cur->next = NULL;
+				cur = prev->next;
+			}
+		}
+		else{
+			prev = cur;
+			cur = cur->next;
+		}	//
+	}
+	if (prev == NULL){
+		return;
+	}
+	else{
+		prev->next = lleven.head;
+		return;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

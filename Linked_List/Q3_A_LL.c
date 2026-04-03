@@ -76,7 +76,7 @@ int main()
 			break;
 		default:
 			printf("Choice unknown;\n");
-			break;
+			break; 
 		}
 	}
 	return 0;
@@ -87,6 +87,65 @@ int main()
 void moveOddItemsToBack(LinkedList *ll)
 {
 	/* add your code here */
+	// ll이 들어오면 llodd를 새로 만듬
+	LinkedList llodd;
+
+	llodd.head = NULL;
+	llodd.size = 0;
+	// prev와 cur을 선언
+	ListNode *prev;
+	ListNode *cur;
+	prev = NULL;
+	cur = ll -> head;
+
+	// ll을 순차적으로 돌면서 llodd에 데이터를 추가함.
+	while(cur!=NULL){
+		if (cur->item %2 == 1){
+			//prev NULL
+			//cur head
+			if(cur == ll->head){ //+prev가 NULL일때
+				// printf("처음에서 뽑기");
+				ll->head = cur->next;
+				insertNode(&llodd, llodd.size, cur->item);
+				ll-> size--;
+				cur->item = NULL;	//cur 초기화
+				cur->next = NULL;
+				cur = ll->head;
+			}
+			else{
+				// printf("중간에서 뽑기");
+				prev->next = cur->next;
+				insertNode(&llodd, llodd.size, cur->item);
+				ll->size--;
+				cur->item = NULL;
+				cur->next = NULL;
+				cur = prev->next;
+			}
+		}
+		else{
+			prev = cur;
+			cur = cur->next;
+		}	//
+	}
+	if (prev == NULL){
+		return;
+	}
+	else{
+		prev->next = llodd.head;
+		return;
+	}
+	//마지막 찾기. 만약에 전부 짝수였으면 prev가 NULL일수 있어서 재처리
+	
+
+	//먼저 ll->head를 next로 옮겨줌
+
+	// insertNode(LinkedList *ll, int index, int value)
+
+	// llodd를 insertNode를 최대한 활용
+	// 마지막에 llodd를 ll뒤에 붙임.
+	
+	
+	
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
