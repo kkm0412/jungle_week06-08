@@ -117,11 +117,28 @@ int main()
 void createQueueFromLinkedList(LinkedList *ll, Queue *q)
 {
 	/* add your code here */
+	if(!isEmptyQueue(q)){
+		removeAllItemsFromQueue(q);
+	}
+	//먼저 비움
+	//q의 주솟값이 들어왔고 q.ll에 ll 본체가 들어가야 하므로 함수에서 ll은 ll의 주소값, *ll은 실제 ll
+	q->ll = *ll;
+	ll->head = NULL;
+	ll->size = 0;
 }
 
 void removeOddValues(Queue *q)
 {
 	/* add your code here */
+	//queue의 사이즈를 가지고 와서 for루프 돌림
+	//deque로 뺀뒤에 짝수면 다시 enqueue, 홀수면 그대로 종료
+	int amount = q->ll.size;
+	for(int i =0; i <amount; i++){
+		int item = dequeue(q);
+		if(item%2 == 0){
+			enqueue(q, item);
+		}
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////

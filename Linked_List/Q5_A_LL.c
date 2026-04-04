@@ -27,7 +27,7 @@ typedef struct _linkedlist{
 // You should not change the prototype of this function
 void frontBackSplitLinkedList(LinkedList* ll, LinkedList *resultFrontList, LinkedList *resultBackList);
 
-void printList(LinkedList *ll);
+void pri3ntList(LinkedList *ll);
 void removeAllItems(LinkedList *l);
 ListNode * findNode(LinkedList *ll, int index);
 int insertNode(LinkedList *ll, int index, int value);
