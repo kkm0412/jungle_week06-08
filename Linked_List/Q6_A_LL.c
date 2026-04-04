@@ -89,6 +89,38 @@ int main()
 int moveMaxToFront(ListNode **ptrHead)
 {
     /* add your code here */
+	//읻단 직접 순회하는거 만들고
+	//cur가 돌아다니면서 big보다 크면 big에 집어넣고 prev를 cur바로 뒤까지 이동 시킴.
+	//cur가 끝까지 다 돌면 prev 기준으로 다음거 끊어서 head에 집어넣기.
+	//만약 가장 큰 수가 앞에 있었을 경우에는 prev가 HEAD이므로 그대로 냅두기
+	if(*ptrHead ==NULL){
+		return;
+	}
+	ListNode *cur = *ptrHead;
+	ListNode *prev;
+	prev->item = 0;
+	prev->next = cur;
+	int big = cur->item;
+	while(cur!=NULL){
+		if(cur->item > big){
+			big = cur->item;
+			while(prev->next != cur){	//cur 뒤까지 오게 순회
+				prev = prev->next;
+			}
+		}
+		cur = cur->next;
+	}
+	//cur을 prev->next에 두고 cur기준으로 끊기.
+	ListNode *head = *ptrHead;
+	cur = prev->next;
+	if(prev->next != head){
+		prev->next = cur->next;
+		cur->next = head;
+		*ptrHead = cur;
+	}
+	else{	//제일 앞에 값이 클 때(prev->next가 헤드를 가리킴)
+		//(아무것도 안해도 됨)
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////

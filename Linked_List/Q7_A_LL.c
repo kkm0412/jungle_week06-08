@@ -28,6 +28,7 @@ typedef struct _linkedlist
 
 // You should not change the prototype of this function
 void RecursiveReverse(ListNode **ptrHead);
+void Recursive(ListNode *cur, ListNode *prev, ListNode **ptrHead);
 
 void printList(LinkedList *ll);
 void removeAllItems(LinkedList *ll);
@@ -87,8 +88,27 @@ int main()
 
 void RecursiveReverse(ListNode **ptrHead)
 {
-	/* add your code here */
+	ListNode *cur = *ptrHead;
+	ListNode *prev = NULL;
+	if(cur == NULL){	//현재값 없을때
+		return;
+	}
+
+	Recursive(cur, prev, ptrHead);
+	 
 }
+
+void Recursive(ListNode *cur, ListNode *prev, ListNode **ptrHead){
+	if(cur->next == NULL){
+		*ptrHead = cur;
+		cur->next = prev;
+		return;
+	}
+	Recursive(cur->next, cur, ptrHead);
+	cur->next = prev;
+	
+}
+
 
 //////////////////////////////////////////////////////////////////////////////////
 

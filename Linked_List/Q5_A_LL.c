@@ -38,7 +38,7 @@ int removeNode(LinkedList *ll, int index);
 
 int main()
 {
-	int c, i;
+	int c = -1, i;
 	LinkedList ll;
 	LinkedList resultFrontList, resultBackList;
 
@@ -103,6 +103,28 @@ int main()
 void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, LinkedList *resultBackList)
 {
 	/* add your code here */
+	//링크드 리스트에서 인덱스 가져오고
+	//만약에 2로 나눴을 때 나머지가 1이면  그대로 인덱스 적용
+	//딱 나눠떨어지면 -1 해서 진행
+	int index;
+	if(ll->size% 2){
+		index = ll->size/2;
+	}
+	else{
+		index = (int)(ll->size/2) - 1;
+	}
+	ListNode *frontTail = findNode(ll, index);
+	ListNode *backHead = frontTail->next;
+	frontTail->next = NULL;
+	resultFrontList->head = ll->head;
+	resultFrontList->size = index;
+
+	resultBackList->head = backHead;
+	resultBackList->size = ll->size - index;
+	//더블 free 되는 문제 있어서 ll을 비워버리기
+	ll->head = NULL;
+	ll->size = 0;
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
