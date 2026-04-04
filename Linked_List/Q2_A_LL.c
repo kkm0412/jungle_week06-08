@@ -113,6 +113,8 @@ void alternateMergeLinkedList(LinkedList *ll1, LinkedList *ll2)
 		//cur2 next에 먼저 cur1 next를 지정하고 cur1 next에 cur2 지정하기
 		cur2->next = cur1->next;
 		cur1->next = cur2;
+		ll1->size++;
+		ll2->size--;
 		//cur1을 cur2.next로 지정.
 		cur1 = cur2->next;
 		//cur2는 ll2.head로 지정

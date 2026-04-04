@@ -88,51 +88,64 @@ void moveEvenItemsToBack(LinkedList *ll)
 {
 	/* add your code here */
 	// ll이 들어오면 llodd를 새로 만듬
+	LinkedList llodd;
 	LinkedList lleven;
-
+	llodd.head = NULL;
+	llodd.size = 0;
 	lleven.head = NULL;
 	lleven.size = 0;
 	// prev와 cur을 선언
-	ListNode *prev;
+	
+	ListNode *oddcur;
+	ListNode *oddhead;
+	ListNode *evencur;
+	ListNode *evenhead;
 	ListNode *cur;
-	prev = NULL;
+	ListNode *nxt;
+	oddcur = llodd.head;
+	oddhead = llodd.head;
+	evencur = lleven.head;
+	evenhead = lleven.head;
+
 	cur = ll -> head;
+	nxt = NULL;
+	
 
 	// ll을 순차적으로 돌면서 llodd에 데이터를 추가함.
 	while(cur!=NULL){
-		if (cur->item %2 == 0){
-			//prev NULL
-			//cur head
-			if(cur == ll->head){ //+prev가 NULL일때
-				// printf("처음에서 뽑기");
-				ll->head = cur->next;
-				insertNode(&lleven, lleven.size, cur->item);
-				ll-> size--;
-				cur->item = NULL;	//cur 초기화
-				cur->next = NULL;
-				cur = ll->head;
+		if (cur->item %2 == 1){
+			nxt = cur->next;
+			cur->next = NULL;
+			if(oddcur !=NULL){
+				oddcur->next = cur;
+				oddcur = oddcur->next;
 			}
 			else{
-				// printf("중간에서 뽑기");
-				prev->next = cur->next;
-				insertNode(&lleven, lleven.size, cur->item);
-				ll->size--;
-				cur->item = NULL;
-				cur->next = NULL;
-				cur = prev->next;
+				oddcur = cur;
+				oddhead = cur;
 			}
+			cur = nxt;
 		}
 		else{
-			prev = cur;
-			cur = cur->next;
+			nxt = cur->next;
+			cur->next = NULL;
+			if(evencur !=NULL){
+				evencur->next = cur;
+				evencur = evencur->next;
+			}
+			else{
+				evencur = cur;
+				evenhead = cur;
+			}
+			cur = nxt;
 		}	//
 	}
-	if (prev == NULL){
-		return;
+	if(oddhead == NULL){
+		ll->head = lleven.head;
 	}
 	else{
-		prev->next = lleven.head;
-		return;
+		ll->head = oddhead;
+		oddcur->next = evenhead;
 	}
 }
 

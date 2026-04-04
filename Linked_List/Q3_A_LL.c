@@ -89,62 +89,64 @@ void moveOddItemsToBack(LinkedList *ll)
 	/* add your code here */
 	// ll이 들어오면 llodd를 새로 만듬
 	LinkedList llodd;
-
+	LinkedList lleven;
 	llodd.head = NULL;
 	llodd.size = 0;
+	lleven.head = NULL;
+	lleven.size = 0;
 	// prev와 cur을 선언
-	ListNode *prev;
+	
+	ListNode *oddcur;
+	ListNode *oddhead;
+	ListNode *evencur;
+	ListNode *evenhead;
 	ListNode *cur;
-	prev = NULL;
+	ListNode *nxt;
+	oddcur = llodd.head;
+	oddhead = llodd.head;
+	evencur = lleven.head;
+	evenhead = lleven.head;
+
 	cur = ll -> head;
+	nxt = NULL;
+	
 
 	// ll을 순차적으로 돌면서 llodd에 데이터를 추가함.
 	while(cur!=NULL){
 		if (cur->item %2 == 1){
-			//prev NULL
-			//cur head
-			if(cur == ll->head){ //+prev가 NULL일때
-				// printf("처음에서 뽑기");
-				ll->head = cur->next;
-				insertNode(&llodd, llodd.size, cur->item);
-				ll-> size--;
-				cur->item = NULL;	//cur 초기화
-				cur->next = NULL;
-				cur = ll->head;
+			nxt = cur->next;
+			cur->next = NULL;
+			if(oddcur !=NULL){
+				oddcur->next = cur;
+				oddcur = oddcur->next;
 			}
 			else{
-				// printf("중간에서 뽑기");
-				prev->next = cur->next;
-				insertNode(&llodd, llodd.size, cur->item);
-				ll->size--;
-				cur->item = NULL;
-				cur->next = NULL;
-				cur = prev->next;
+				oddcur = cur;
+				oddhead = cur;
 			}
+			cur = nxt;
 		}
 		else{
-			prev = cur;
-			cur = cur->next;
+			nxt = cur->next;
+			cur->next = NULL;
+			if(evencur !=NULL){
+				evencur->next = cur;
+				evencur = evencur->next;
+			}
+			else{
+				evencur = cur;
+				evenhead = cur;
+			}
+			cur = nxt;
 		}	//
 	}
-	if (prev == NULL){
-		return;
+	if(evenhead == NULL){
+		ll->head = llodd.head;
 	}
 	else{
-		prev->next = llodd.head;
-		return;
+		ll->head = evenhead;
+		evencur->next = oddhead;
 	}
-	//마지막 찾기. 만약에 전부 짝수였으면 prev가 NULL일수 있어서 재처리
-	
-
-	//먼저 ll->head를 next로 옮겨줌
-
-	// insertNode(LinkedList *ll, int index, int value)
-
-	// llodd를 insertNode를 최대한 활용
-	// 마지막에 llodd를 ll뒤에 붙임.
-	
-	
 	
 }
 
