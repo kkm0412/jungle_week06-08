@@ -114,11 +114,33 @@ int main()
 void createStackFromLinkedList(LinkedList *ll, Stack *s)
 {
     /* add your code here */
+	//
+	if(!isEmptyStack(s)){
+		removeAllItemsFromStack(s);
+	}
+	//
+	s->ll = *ll;
+	ll->head = NULL;
+	ll->size = 0;
+		
 }
 
 void removeEvenValues(Stack *s)
 {
 	/* add your code here */
+	//스택의 사이즈를 세고 그걸로 pop push
+	Stack substack;
+	substack.ll.head = NULL;
+	int amount = s->ll.size;
+	for(int i = 0; i< amount;i++){
+		int x = pop(s);
+		if(x%2==1){
+			push(&substack, x);
+		}
+	}
+	while(substack.ll.head != NULL){
+		push(s,pop(&substack));
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////
