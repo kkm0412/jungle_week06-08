@@ -104,6 +104,23 @@ int main()
 int isStackPairwiseConsecutive(Stack *s)
 {
   /* add your code here */
+  //두번 pop한걸 x1, x2에 넣고
+  //둘이 연속적이면 True,
+  //둘이 연속적이지 않을때 false,
+  //하나가 INT_MIN이면 False,
+  //두개가 INT_MIN이면 종료
+  int x1 = pop(s);
+  int x2 = pop(s);
+  int isPairwise = 0;
+  while(x1!=INT_MIN&&x2!=INT_MIN){
+	x1 = pop(s);
+	x2 = pop(s);
+	if (x1!=INT_MIN&&x2!=INT_MIN){
+		return 1;
+	}
+	if(	x1-x2 == -1 || x1-x2 == 1){}
+	else{	return 0;}
+  }
 }
 
 //////////////////////////////////////////////////////////////////////////////////

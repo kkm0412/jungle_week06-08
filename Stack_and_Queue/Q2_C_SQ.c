@@ -128,7 +128,8 @@ void createStackFromLinkedList(LinkedList *ll, Stack *s)
 void removeEvenValues(Stack *s)
 {
 	/* add your code here */
-	//스택의 사이즈를 세고 그걸로 pop push
+	//서브스택을 하나 만들어서 s에서 pop한것중 홀수만 서브스택에 전부 푸시하고
+	//나중에 서브스택 다시 팝해서 결과 전부 스택에 집어넣기
 	Stack substack;
 	substack.ll.head = NULL;
 	int amount = s->ll.size;
