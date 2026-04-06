@@ -103,6 +103,24 @@ int main()
 int hasGreatGrandchild(BTNode *node)
 {
 	/* add your code here */
+    //자신기준 노드 깊이가 3인 자식이 있으면 출력.
+    //
+    if(node == NULL){
+        return 0;
+    }
+    int count = 1;
+    int l = hasGreatGrandchild(node->left);
+    int r = hasGreatGrandchild(node->right);
+    if (l < r){
+        count+= r;
+    }
+    else{
+        count+=l;
+    }
+    if(count>3){
+        printf("%d ",node->item);
+    }
+
 }
 
 //////////////////////////////////////////////////////////////////////////////////

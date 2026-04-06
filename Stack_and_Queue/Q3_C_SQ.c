@@ -109,18 +109,16 @@ int isStackPairwiseConsecutive(Stack *s)
   //둘이 연속적이지 않을때 false,
   //하나가 INT_MIN이면 False,
   //두개가 INT_MIN이면 종료
-  int x1 = pop(s);
-  int x2 = pop(s);
+  int x1 = 0;
+  int x2 = 0;
   int isPairwise = 0;
-  while(x1!=INT_MIN&&x2!=INT_MIN){
+  while(s->ll.size != 0){
 	x1 = pop(s);
 	x2 = pop(s);
-	if (x1!=INT_MIN&&x2!=INT_MIN){
-		return 1;
-	}
 	if(	x1-x2 == -1 || x1-x2 == 1){}
 	else{	return 0;}
   }
+  return 1; //갯수가 짝수이고, 전부 연속적인면 여기까지 올거임.
 }
 
 //////////////////////////////////////////////////////////////////////////////////

@@ -106,6 +106,16 @@ int main()
 void printSmallerValues(BTNode *node, int m)
 {
 	/* add your code here */
+    // 그냥 재귀 돌고 m보다 작은거 저장해서 출력하면 됨
+    // printf("%d ",)로. 전위순회
+    if(node ==NULL){    //언제나있는 예외처리
+        return;
+    }
+    if(node->item < m){
+        printf("%d ", node->item);
+    }
+    printSmallerValues(node->left, m);
+    printSmallerValues(node->right, m);
 }
 
 //////////////////////////////////////////////////////////////////////////////////

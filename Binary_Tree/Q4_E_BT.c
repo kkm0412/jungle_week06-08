@@ -104,6 +104,18 @@ int sumOfOddNodes(BTNode *node)
 
 {
     /* add your code here */
+    //재귀하다가 odd값 나오면 더해서 리턴하기
+    if(node==NULL){
+        return 0;
+    }
+    int leftx = sumOfOddNodes(node->left);
+    int rightx=sumOfOddNodes(node->right);
+    if(node->item %2 ==1){
+        return (node->item)+leftx+rightx;
+    }
+    else{
+        return leftx+rightx;
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////

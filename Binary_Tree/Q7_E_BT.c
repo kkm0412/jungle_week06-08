@@ -103,6 +103,32 @@ int main()
 int smallestValue(BTNode *node)
 {
 	/* add your code here */
+    //대충 재귀하고 트리 끝부터 값가져다가 리턴하고.
+    //리턴 하면서 현재 노드랑 비교해서 작은값만 리턴하면됨;
+    
+    //끝처리
+    if(node==NULL){
+        return 999999999;
+    }
+    int l = smallestValue(node->left);
+    int r = smallestValue(node->right);
+    int i = node->item;
+    if(l<r){
+        if(i<l){
+            return i;
+        }
+        else{
+            return l;
+        }
+    }
+    else{
+        if(i<r){
+            return i;
+        }
+        else{
+            return r;
+        }
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////

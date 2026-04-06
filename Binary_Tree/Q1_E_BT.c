@@ -117,6 +117,49 @@ int identical(BTNode *tree1, BTNode *tree2)
 
 {
    /* add your code here */
+   //스택이 구현되어있으므로 dfs로 서로 비교하면서 동일한지 아닌지 확인하기
+   //스택에 노드의 주소값을 저장하고. 그 노드의 item을 확인
+    Stack memory1;
+    Stack memory2;
+    memory1.top = NULL;
+    memory2.top = NULL;
+    push(&memory1, tree1);
+    push(&memory2, tree2);
+    int isIdentical = 1;
+    //트리를 dfs로 찾다가 NULL이 나오면 넣지 않음.
+    //스택에서 뽑으면서 비교, 비교중 다르면 바로 거짓, 혹시 스택에 값이 비어있으면(NULL출력시) 종료
+    //종료 후에 스택에 값이 남아있으면 거짓, 값이 없으면 참
+    while(1){
+        BTNode* x1 = pop(&memory1);
+        BTNode* x2 = pop(&memory2);
+        if(x1 == NULL || x2 == NULL){//둘중 하나만 NULL이도 while 문 멈춤
+            if(x1==NULL && x2==NULL){}  //둘다 NULL아니면 다른 트리임
+            else{
+                isIdentical =0;
+            }
+            break;
+        }
+        if(x1->item!=x2->item){ //서로 값이 다르면 동일하지 않음
+            isIdentical = 0;
+            break;
+        }
+        
+        //스택에 집어넣기
+        if(x1->left != NULL){
+            push(&memory1, x1->left);
+        }
+        if(x1->right != NULL){
+            push(&memory1, x1->right);
+        }
+        if(x2->left != NULL){
+            push(&memory2, x2->left);
+        }
+        if(x2->right != NULL){
+            push(&memory2, x2->right);
+        }
+        
+    }
+    return isIdentical;
 }
 
 /////////////////////////////////////////////////////////////////////////////////

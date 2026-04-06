@@ -97,7 +97,23 @@ int main()
 int maxHeight(BTNode *node)
 
 {
+    if(node == NULL){
+        return -1;
+    }
     /* add your code here */
+    //visited라는 동적배열을 만들고 그 배열에 노드와 높이값을를 저장함.
+    //메모리에 저장할때 노드의 item에 높이값을 대신 저장함.
+    int high = 1;
+    
+    int highleft = maxHeight(node->left);
+    int highright = maxHeight(node->right);
+    if(highleft>=highright){
+        return highleft+high;
+    }
+    else{
+        return highright+high;
+    }
+    
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

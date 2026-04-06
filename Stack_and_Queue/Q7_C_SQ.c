@@ -105,6 +105,35 @@ int main()
 int balanced(char *expression)
 {
 /* add your code here */
+	int size = (int)(sizeof(expression) / sizeof(char));
+	Stack s;
+	s.ll.size = 0;
+	s.ll.head = NULL;
+	for(int i = 0; i < size; i++){
+		char a = expression[i];
+		if(a=='(' || a== '{' || a=='['){//괄호 여는거일때
+			push(&s, a);
+		}
+		else if(a == ')'){
+			char b = pop(&s);
+			if(b!='('){
+				return 1;
+			}
+		}
+		else if(a == '}'){
+			char b = pop(&s);
+			if(b!='{'){
+				return 1;
+			}
+		}
+		else if(a == ']'){
+			char b = pop(&s);
+			if(b!='['){
+				return 1;
+			}
+		}
+	}
+	return 0;
 }
 
 ////////////////////////////////////////////////////////////

@@ -112,6 +112,17 @@ int main()
 void removeUntil(Stack *s, int value)
 {
 /* add your code here */
+	//그냥 값나올때까지 pop하면될듯?
+	int x = value -31;
+	while(x != value && s->ll.size != 0){
+		x = pop(s);
+	}
+	//마지막 값 x ==value이면 다시 push 하기
+	if(x ==value){
+		push(s, x);
+	}
+
+
 }
 
 //////////////////////////////////////////////////////////////////////////////////
