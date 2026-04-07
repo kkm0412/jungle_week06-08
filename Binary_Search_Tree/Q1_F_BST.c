@@ -95,6 +95,25 @@ void levelOrderTraversal(BSTNode* root)
 {
 
     /* add your code here */
+	//bfs를 써야 함.
+	//queue만들어놓고 거기것 enquedeque로 뽑아쓰면 될듯.
+	Queue q;//노드 저장용
+	q.head =NULL;
+	q.tail =NULL;
+	enqueue(&q.head, &q.tail, root);
+	while(q.head != NULL){
+		//큐에서 deque한다음에, 메시지 출력후 left enque, right enque하기
+		BSTNode *node = dequeue(&q.head, &q.tail);
+		printf("%d ", node->item);
+		if(node->left != NULL){
+			enqueue(&q.head, &q.tail, node->left);
+		}
+		if(node->right != NULL){
+			enqueue(&q.head, &q.tail, node->right);
+		}
+		
+	}
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////

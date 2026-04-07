@@ -92,6 +92,30 @@ int main()
 void postOrderIterativeS2(BSTNode *root)
 {
 	 /* add your code here */
+	   /* add your code here */
+	  //스택 만들어서 거기에 넣고 dfs로 반복
+	Stack s;
+	s.top = NULL;
+	Stack s2;
+	s2.top = NULL;
+	BSTNode *cur = root;
+	while(cur!=NULL || s.top != NULL){
+		while(cur!=NULL){
+			push(&s, cur);
+			push(&s2, cur);
+			cur = cur->right;
+		}
+		BSTNode * x = pop(&s);
+		if(x->left != NULL){
+			cur = x->left;
+		}
+	}
+
+	while(s2.top != NULL){
+		printf("%d ", pop(&s2)->item);
+	}
+
+	removeAll(&root);
 }
 
 /* Given a binary search tree and a key, this function

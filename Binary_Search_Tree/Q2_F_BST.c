@@ -91,6 +91,23 @@ int main()
 void inOrderTraversal(BSTNode *root)
 {
 	 /* add your code here */
+	 //스택 만들어서 거기에 넣고 dfs로 반복
+	Stack s;
+	s.top = NULL;
+	BSTNode *cur = root;
+	while(s.top != NULL || cur!=NULL){
+		while(cur!=NULL){
+			push(&s,cur);
+			cur = cur->left;	
+		}
+		BSTNode *x = pop(&s);
+		if(x != NULL){
+			printf("%d ", x->item);
+			cur = x->right;
+		}
+		
+	}
+	removeAll(&root);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -91,9 +91,33 @@ int main()
 
 void postOrderIterativeS1(BSTNode *root)
 {
-	 /* add your code here */
-}
+	  /* add your code here */
+	  //스택 만들어서 거기에 넣고 dfs로 반복
+	Stack s;
+	s.top = NULL;
+	BSTNode *cur = root;
+	BSTNode *prev = NULL;
+	//좌로 들어가면서 우-> 좌 순서로 스택에 집어넣음
+	//돌아오면서 그 값이 좌,우 값을 모두 가지고 있을때 우가 갔다왔던 거라면 스킵. 
+	while(s.top != NULL || cur!=NULL){
+		while(cur!=NULL){	//계속 왼쪽으로 올라감
+			push(&s, cur);
+			cur = cur->left;
+		}
+		cur = peek(&s);	//현재 가지에서 오른쪽 잎이 있는지 확인
+		if(cur->right!= NULL && cur->right!= prev){//있으면 우측 잎으로 이동
+			cur = cur->right;
+		}
+		else{//없으면 pop해서 출력함.
+			BSTNode *x = pop(&s);
+			printf("%d ", x->item);
+			prev = x;
+			cur = NULL;
+		}
 
+	}
+	removeAll(&root);
+}
 ///////////////////////////////////////////////////////////////////////////////
 
 void insertBSTNode(BSTNode **node, int value){
